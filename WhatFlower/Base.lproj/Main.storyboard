@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--WhatFlower-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WhatFlower" customModuleProvider="target" sceneMemberID="viewController">
@@ -30,21 +30,34 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take a picture to learn more about a flower ↗️" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXo-4h-0h4">
+                                <rect key="frame" x="75" y="80" width="225" height="94"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="94" id="fs7-9R-dr2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rct-m6-4a4" secondAttribute="trailing" constant="16" id="77w-oH-LKb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="LJO-a5-qQx" secondAttribute="bottom" constant="16" id="7Va-nM-aOf"/>
                             <constraint firstItem="LJO-a5-qQx" firstAttribute="top" secondItem="rct-m6-4a4" secondAttribute="bottom" constant="16" id="ATW-vE-cMI"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LJO-a5-qQx" secondAttribute="trailing" constant="16" id="K2N-2v-vP8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YXo-4h-0h4" secondAttribute="trailing" constant="75" id="LE1-pI-Iwj"/>
+                            <constraint firstItem="YXo-4h-0h4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="75" id="OYp-N3-BBh"/>
                             <constraint firstItem="LJO-a5-qQx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="QKW-Jd-sSY"/>
                             <constraint firstItem="rct-m6-4a4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="RNF-ZM-qd3"/>
+                            <constraint firstItem="YXo-4h-0h4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="ieB-XZ-eEq"/>
                             <constraint firstItem="rct-m6-4a4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="oxu-N1-89P"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="hdS-TQ-a1x">
+                    <navigationItem key="navigationItem" title="WhatFlower" id="hdS-TQ-a1x">
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="0aq-ok-iGA">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="cameraTapped:" destination="BYZ-38-t0r" id="gel-rP-mUD"/>
                             </connections>
@@ -53,6 +66,7 @@
                     <connections>
                         <outlet property="flowerImageView" destination="rct-m6-4a4" id="jtQ-33-EEO"/>
                         <outlet property="infoLabel" destination="LJO-a5-qQx" id="0dQ-dJ-ij5"/>
+                        <outlet property="promptLabel" destination="YXo-4h-0h4" id="yvN-FI-WNd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -67,6 +81,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HbU-o5-hf7">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.4866698384" green="0.80488318199999997" blue="0.75294035670000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -75,7 +93,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iJ7-RN-jbU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="164" y="133"/>
+            <point key="canvasLocation" x="244" y="133"/>
         </scene>
     </scenes>
 </document>

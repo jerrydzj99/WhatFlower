@@ -17,6 +17,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBOutlet weak var flowerImageView: UIImageView!
     @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var promptLabel: UILabel!
     
     let wikipediaURl = "https://en.wikipedia.org/w/api.php"
     let imagePicker = UIImagePickerController()
@@ -101,6 +102,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     @IBAction func cameraTapped(_ sender: UIBarButtonItem) {
         present(imagePicker, animated: true, completion: nil)
+        promptLabel.isHidden = true
     }
     
 }
