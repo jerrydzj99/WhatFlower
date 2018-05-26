@@ -9,11 +9,15 @@
 import UIKit
 import CoreML
 import Vision
+import Alamofire
+import SwiftyJSON
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var userPickedImageView: UIImageView!
+    @IBOutlet weak var infoLabel: UILabel!
     
+    let wikipediaURl = "https://en.wikipedia.org/w/api.php"
     let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
@@ -45,9 +49,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         let request = VNCoreMLRequest(model: model) { (request, error) in
             
-            let classification = request.results?.first as? VNClassificationObservation
+            guard let classification = request.results?.first as? VNClassificationObservation else { fatalError("failed to classify image") }
             
-            self.navigationItem.title = classification?.identifier.capitalized
+            self.navigationItem.title = classification.identifier.capitalized
+            self.requestInfo(flowerName: classification.identifier)
             
         }
         
@@ -57,6 +62,32 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             try handler.perform([request])
         } catch {
             print("error performing request \(error)")
+        }
+        
+    }
+    
+    func requestInfo(flowerName: String) {
+        
+        let parameters : [String:String] = [
+            "format" : "json",
+            "action" : "query",
+            "prop" : "extracts",
+            "exintro" : "",
+            "explaintext" : "",
+            "titles" : flowerName,
+            "indexpageids" : "",
+            "redirects" : "1",
+            ]
+        
+        Alamofire.request(wikipediaURl, method: .get, parameters: parameters).responseJSON { (response) in
+            if response.result.isSuccess {
+                let responseJSON : JSON = JSON(response.result.value!)
+                let pageID = responseJSON["query"]["pageids"][0].stringValue
+                let extract = responseJSON["query"]["pages"][pageID]["extract"].stringValue
+                self.infoLabel.text = extract
+            } else {
+                print("error making networking call")
+            }
         }
         
     }
