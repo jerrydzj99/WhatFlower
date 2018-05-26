@@ -51,8 +51,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="flowerImageView" destination="rct-m6-4a4" id="jtQ-33-EEO"/>
                         <outlet property="infoLabel" destination="LJO-a5-qQx" id="0dQ-dJ-ij5"/>
-                        <outlet property="userPickedImageView" destination="rct-m6-4a4" id="jtQ-33-EEO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

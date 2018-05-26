@@ -11,10 +11,11 @@ import CoreML
 import Vision
 import Alamofire
 import SwiftyJSON
+import SDWebImage
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    @IBOutlet weak var userPickedImageView: UIImageView!
+    @IBOutlet weak var flowerImageView: UIImageView!
     @IBOutlet weak var infoLabel: UILabel!
     
     let wikipediaURl = "https://en.wikipedia.org/w/api.php"
@@ -30,8 +31,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let userPickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            
-            userPickedImageView.image = userPickedImage
             
             guard let ciimage = CIImage(image: userPickedImage) else { fatalError("could not convert to ciimage") }
             
@@ -71,23 +70,31 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let parameters : [String:String] = [
             "format" : "json",
             "action" : "query",
-            "prop" : "extracts",
+            "prop" : "extracts|pageimages",
             "exintro" : "",
             "explaintext" : "",
             "titles" : flowerName,
             "indexpageids" : "",
             "redirects" : "1",
+            "pithumbsize" : "500"
             ]
         
         Alamofire.request(wikipediaURl, method: .get, parameters: parameters).responseJSON { (response) in
+            
             if response.result.isSuccess {
+                
                 let responseJSON : JSON = JSON(response.result.value!)
                 let pageID = responseJSON["query"]["pageids"][0].stringValue
                 let extract = responseJSON["query"]["pages"][pageID]["extract"].stringValue
+                let imageURL = responseJSON["query"]["pages"][pageID]["thumbnail"]["source"].stringValue
+                
                 self.infoLabel.text = extract
+                self.flowerImageView.sd_setImage(with: URL(string: imageURL))
+                
             } else {
                 print("error making networking call")
             }
+            
         }
         
     }
